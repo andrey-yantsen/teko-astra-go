@@ -14,7 +14,7 @@ func main() {
 	action_find := flag.Bool("find-device", false, "run FindDevice command")
 	action_register := flag.Bool("register-device", false, "run RegisterDevice command")
 	action_delete := flag.Bool("delete-device", false, "run DeleteDevice command")
-	action_createl2net := flag.Uint("create-l2-net", 99999999, "(re-)create Level2 net")
+	action_createl2net := flag.Uint("create-l2-net", 0, "(re-)create Level2 net")
 	action_registerl2dev := flag.Bool("register-l2-device", false, "register new Level2 device")
 	action_getstate := flag.Bool("get-state", false, "get RI-M status")
 	action_getevents := flag.Bool("get-events", false, "get RI-M events")
@@ -61,9 +61,14 @@ func main() {
 				fmt.Printf("Device events: %+v\n", e)
 			}
 		}
-		if *action_createl2net < 4 {
+		if *action_createl2net > 0 {
+			if *action_createl2net > 3 {
+				panic("channel number should be less than 4")
+			}
 			if err := device.CreateLevel2Net(uint8(*action_createl2net)); err != nil {
 				panic(err)
+			} else {
+				println("Net successfully registered")
 			}
 		}
 		if *action_registerl2dev {
