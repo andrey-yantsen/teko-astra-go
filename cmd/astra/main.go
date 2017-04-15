@@ -16,6 +16,7 @@ func main() {
 	action_delete := flag.Bool("delete-device", false, "run DeleteDevice command")
 	action_createl2net := flag.Uint("create-l2-net", 0, "(re-)create Level2 net")
 	action_registerl2dev := flag.Bool("register-l2-device", false, "register new Level2 device")
+	action_deletel2dev := flag.Uint("delete-l2-device", 0, "delete Level2 device")
 	action_getstate := flag.Bool("get-state", false, "get RI-M status")
 	action_getevents := flag.Bool("get-events", false, "get RI-M events")
 	flag.Parse()
@@ -76,6 +77,13 @@ func main() {
 				panic(err)
 			} else {
 				fmt.Printf("Registered new L2 device: %+v\n", dev)
+			}
+		}
+		if *action_deletel2dev > 0 {
+			if err := device.DeleteLevel2Device(uint16(*action_deletel2dev)); err != nil {
+				panic(err)
+			} else {
+				println("L2 device deleted")
 			}
 		}
 	}
