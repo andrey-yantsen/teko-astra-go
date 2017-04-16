@@ -20,6 +20,7 @@ func main() {
 	action_deletel2all := flag.Bool("delete-l2-all", false, "delete all Level2 devices")
 	action_getstate := flag.Bool("get-state", false, "get RI-M status")
 	action_getevents := flag.Bool("get-events", false, "get RI-M events")
+	action_getl2netconfig := flag.Bool("get-net-l2-config", false, "get L2 net config")
 	flag.Parse()
 	if driver, err := astra_l.Connect(*serial); err != nil {
 		panic(err)
@@ -120,6 +121,13 @@ func main() {
 				panic(err)
 			} else {
 				println("All L2 devices deleted")
+			}
+		}
+		if *action_getl2netconfig {
+			if c, err := device.GetNetLevel2Config(); err != nil {
+				panic(err)
+			} else {
+				fmt.Printf("NET config: %+v\n", c)
 			}
 		}
 	}
