@@ -17,10 +17,11 @@ endif
 
 CURDIR := $(shell pwd)
 GOENV := GOOS=$(GOOS) GOARCH=$(GOARCH) $(GOENV_EXTRA)
+GOVER := $(shell go version | cut -d ' ' -f 3)
 
 deps:
 	cd $$(go env GOPATH)\
-	  && wget -O $(GOOS)_$(GOARCH).tar.gz $$(curl -s https://api.github.com/repos/andrey-yantsen/teko-astra-go/releases/latest | fgrep browser_download_url | cut -d'"' -f 4 | fgrep _$(GOOS)_$(GOARCH).)\
+	  && wget -O $(GOOS)_$(GOARCH).tar.gz $$(curl -s https://api.github.com/repos/andrey-yantsen/teko-astra-go/releases/latest | fgrep browser_download_url | cut -d'"' -f 4 | fgrep $(GOVER)_$(GOOS)_$(GOARCH).)\
 	  && tar -zxf $(GOOS)_$(GOARCH).tar.gz\
 	  && rm $(GOOS)_$(GOARCH).tar.gz
 
