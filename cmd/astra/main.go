@@ -63,32 +63,7 @@ func main() {
 			} else {
 				fmt.Printf("Got %d device events\n", len(e))
 				for _, ev := range e {
-					switch ev.(type) {
-					case astra_l.EventNoLink:
-						fmt.Printf("NoLink event: %+v\n", ev)
-					case astra_l.EventSStateRtm:
-						fmt.Printf("EventSStateRtm event: %+v\n", ev)
-					case astra_l.EventSStateRtmLC:
-						fmt.Printf("EventSStateRtmLC event: %+v\n", ev)
-					case astra_l.EventSStateBrr:
-						fmt.Printf("EventSStateBrr event: %+v\n", ev)
-					case astra_l.EventSStateRimRtr:
-						fmt.Printf("EventSStateRimRtr event: %+v\n", ev)
-					case astra_l.EventSStateKeychain:
-						fmt.Printf("EventSStateKeychain event: %+v\n", ev)
-					case astra_l.EventSStateOtherWithNoData:
-						fmt.Printf("EventSStateOtherWithNoData event: %+v\n", ev)
-					case astra_l.EventSStateOtherWithPower:
-						fmt.Printf("EventSStateOtherWithPower event: %+v\n", ev)
-					case astra_l.EventSStateOtherWithTemperature:
-						fmt.Printf("EventSStateOtherWithTemperature event: %+v\n", ev)
-					case astra_l.EventSStateOtherWithSmoke:
-						fmt.Printf("EventSStateOtherWithSmoke event: %+v\n", ev)
-					case astra_l.EventRRState:
-						fmt.Printf("EventRRState event: %+v\n", ev)
-					default:
-						fmt.Printf("Got some strange event: %+v\n", ev)
-					}
+					fmt.Printf("%T event: %+v\n", ev, ev)
 				}
 			}
 		}
