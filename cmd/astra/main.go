@@ -25,6 +25,7 @@ func main() {
 	if driver, err := astra_l.Connect(*serial); err != nil {
 		panic(err)
 	} else {
+		driver.Start()
 		device := driver.GetDevice(uint16(*address))
 		if *action_find {
 			if f, err := device.FindDevice(); err != nil {
